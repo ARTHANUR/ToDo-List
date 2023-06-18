@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaTrash, FaPlus, FaCheck } from "react-icons/fa";
+import { FaTrash, FaPlus, FaCheck, FaCheckDouble, BiCheckDouble, FaTimes } from "react-icons/fa";
 import "./Todo.css";
 
 const Todo = () => {
@@ -43,15 +43,22 @@ const Todo = () => {
     //     setTodo(updatedTodo);
     // };
 
-    
+    const handleClearAll = (index) => {
+        const clear = todo.filter((_, i) => index === -2);
+        setTodo(clear);
+    };
 
     return (
         <>
             <h1>Notes</h1>
             <div className="input-area">
                 <input onKeyPress={handleKeyPress} value={input} onChange={handleInput} type="text" />
+
                 <FaPlus className="plus-icon" onClick={handleAddTodo} />
-                <h1>Clear all</h1>
+                <div onClick={handleClearAll} className="clear">
+                    <span>Clear all</span>
+                    <FaTimes className="wrong-icon" />
+                </div>
             </div>
             <div className="container">
                 {todo.map((item, index) => (

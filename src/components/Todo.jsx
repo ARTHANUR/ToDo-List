@@ -22,7 +22,10 @@ const Todo = () => {
             handleAddTodo();
         }
     };
-
+    const handleDelete = (index) => {
+        const updatedTodo = todo.filter((_,i) => i !== index);
+        setTodo(updatedTodo)
+    }
     
     return (
         <>
@@ -35,7 +38,7 @@ const Todo = () => {
                 {todo.map((item , index) => (
                     <div className="content">
                         <h3 key={index}>{item}</h3>
-                        <FaTrash />
+                        <FaTrash onClick={ () => handleDelete(index)} />
                     </div>
                 ))}
             </div>

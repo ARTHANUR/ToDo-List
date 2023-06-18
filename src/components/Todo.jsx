@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaTrash, FaPlus, FaCheck, FaCheckDouble, BiCheckDouble, FaTimes } from "react-icons/fa";
+import { FaTrash, FaPlus, FaCheck, FaCheckDouble, BiCheckDouble, FaTimes ,FaRegEdit } from "react-icons/fa";
 import "./Todo.css";
 
 const Todo = () => {
@@ -68,6 +68,7 @@ const Todo = () => {
                         </h3>
                         <div className="edit-todo">
                             <FaCheck className="check-icon icon" /*onClick={() => handleCheck(index)}*/ />
+                            <FaRegEdit className="icon" />
                             <FaTrash className="delete-icon icon" onClick={() => handleDelete(index)} />
                         </div>
                     </div>

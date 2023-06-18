@@ -100,6 +100,7 @@
   .icon {
       font-size: 1.5rem;
       background-color: transparent;
+      cursor: pointer;
 
   }
 
@@ -109,6 +110,10 @@
       font-size: 1.5rem;
       display: flex;
       align-items: center;
+      transition: 1s ease-in-out ;
+  }
+  .clear:hover{
+    border-bottom: 1.5px solid grey;
   }
 
   .wrong-icon {

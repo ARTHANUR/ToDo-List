@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { FaTrash, FaPlus, FaCheck,  FaTimes, FaRegEdit ,FaSave } from "react-icons/fa";
+import { FaTrash, FaPlus, FaCheck, FaTimes, FaRegEdit, FaSave } from "react-icons/fa";
 import "./Todo.css";
+import Confetti from "react-confetti";
 
 const Todo = () => {
     const [input, setInput] = useState("");
     const [todo, setTodo] = useState([]);
     const [editIndex, setEditIndex] = useState(null);
     const [editValue, setEditValue] = useState("");
+    const [checkDone, setCheckDone] = useState(false);
 
     const handleInput = (input) => {
         setInput(input.target.value);
@@ -50,6 +52,9 @@ const Todo = () => {
         setEditIndex(null);
         setEditValue("");
     };
+    const handleCheck = () => {
+        setCheckDone(true);
+    };
     return (
         <>
             <h1>Notes</h1>
@@ -65,17 +70,20 @@ const Todo = () => {
             <div className="container">
                 {todo.map((item, index) => (
                     <div key={index} style={{ backgroundColor: generateRandomColor() }} className="content">
+                        {checkDone && <Confetti className="confetti" />}
+
                         {editIndex === index ? (
                             <>
                                 <input className="edit-input" type="text " value={editValue} onChange={(e) => setEditValue(e.target.value)} />
-                                <button className="edit-btn" onClick={handleSave}>Save <br /> <FaSave className="icon-save" /></button>
-                                
+                                <button className="edit-btn" onClick={handleSave}>
+                                    Save <br /> <FaSave className="icon-save" />
+                                </button>
                             </>
                         ) : (
                             <>
                                 <h3>{item}</h3>
                                 <div className="edit-todo">
-                                    <FaCheck className="check-icon icon" />
+                                    <FaCheck onClick={handleCheck} className="check-icon icon" />
                                     <FaRegEdit onClick={() => handleEdit(index)} className="icon" />
                                     <FaTrash className="delete-icon icon" onClick={() => handleDelete(index)} />
                                 </div>

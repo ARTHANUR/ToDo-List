@@ -6,6 +6,7 @@
       padding: 0;
       font-weight: 500;
       background-color: #fbfbfa;
+      scroll-behavior: smooth;
   }
 
   h1 {
@@ -72,6 +73,7 @@
       overflow-y: scroll;
       background-color: transparent;
       color: white;
+      font-size: 1.7rem;
   }
 
   .content>h3::-webkit-scrollbar {
@@ -156,4 +158,8 @@
 
   .icon:hover{
     color: white;
+  }
+
+  .confetti{
+    background-color: transparent;
   }

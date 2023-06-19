@@ -52,8 +52,21 @@ const Todo = () => {
         setEditIndex(null);
         setEditValue("");
     };
-    const handleCheck = () => {
+    const handleCheck = (index) => {
         setCheckDone(true);
+        handleDelete(index);
+    };
+    const confettiProps = {
+        numberOfPieces: 100,
+        gravity: 0.3,
+        initialVelocityX: 5,
+        initialVelocityY: 10,
+        recycle: false,
+        colors: ["#ff0000", "#00ff00", "#0000ff"],
+        onConfettiComplete: () => setCheckDone(false),
+        confettiSource: { x: 0, y: 0, w: window.innerWidth, h: window.innerHeight },
+        wind: 0,
+        duration: 200,
     };
     return (
         <>
@@ -70,7 +83,7 @@ const Todo = () => {
             <div className="container">
                 {todo.map((item, index) => (
                     <div key={index} style={{ backgroundColor: generateRandomColor() }} className="content">
-                        {checkDone && <Confetti className="confetti" />}
+                        {checkDone && <Confetti {...confettiProps} className="confetti" />}
 
                         {editIndex === index ? (
                             <>
@@ -83,7 +96,7 @@ const Todo = () => {
                             <>
                                 <h3>{item}</h3>
                                 <div className="edit-todo">
-                                    <FaCheck onClick={handleCheck} className="check-icon icon" />
+                                    <FaCheck onClick={() => handleCheck(index)} className="check-icon icon" />
                                     <FaRegEdit onClick={() => handleEdit(index)} className="icon" />
                                     <FaTrash className="delete-icon icon" onClick={() => handleDelete(index)} />
                                 </div>

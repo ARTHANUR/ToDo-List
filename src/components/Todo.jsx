@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaTrash, FaPlus, FaCheck, FaCheckDouble, BiCheckDouble, FaTimes, FaRegEdit } from "react-icons/fa";
+import { FaTrash, FaPlus, FaCheck,  FaTimes, FaRegEdit ,FaSave } from "react-icons/fa";
 import "./Todo.css";
 
 const Todo = () => {
@@ -67,8 +67,9 @@ const Todo = () => {
                     <div key={index} style={{ backgroundColor: generateRandomColor() }} className="content">
                         {editIndex === index ? (
                             <>
-                                <input type="text " value={editValue} onChange={(e) => setEditValue(e.target.value)} />
-                                <button onClick={handleSave}>Save</button>
+                                <input className="edit-input" type="text " value={editValue} onChange={(e) => setEditValue(e.target.value)} />
+                                <button className="edit-btn" onClick={handleSave}>Save <br /> <FaSave className="icon-save" /></button>
+                                
                             </>
                         ) : (
                             <>

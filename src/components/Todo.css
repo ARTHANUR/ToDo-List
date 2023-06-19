@@ -62,6 +62,8 @@
       justify-content: space-between;
       padding: 2%;
       box-shadow: 9px 10px 13px 9px rgba(0, 0, 0, 0.15);
+      background: linear-gradient(150.4deg, rgba(254, 104, 104, 0.74) 0%, rgba(41, 123, 245, 0.15) 81.88%);
+
   }
 
   .content>h3 {
@@ -84,6 +86,7 @@
       overflow-y: scroll;
       margin: auto;
       margin-top: 4%;
+
   }
 
   .container::-webkit-scrollbar {
@@ -102,7 +105,7 @@
       font-size: 1.5rem;
       background-color: transparent;
       cursor: pointer;
-
+        transition: .1s ease-in;
   }
 
   .clear {
@@ -149,4 +152,8 @@
       color: white;
       background-color: transparent;
 
+  }
+
+  .icon:hover{
+    color: white;
   }

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { FaTrash, FaPlus, FaCheck, FaCheckDouble, BiCheckDouble, FaTimes ,FaRegEdit } from "react-icons/fa";
+import { FaTrash, FaPlus, FaCheck, FaCheckDouble, BiCheckDouble, FaTimes, FaRegEdit } from "react-icons/fa";
 import "./Todo.css";
 
 const Todo = () => {
     const [input, setInput] = useState("");
     const [todo, setTodo] = useState([]);
+    const [editIndex, setEditIndex] = useState(null);
+    const [editValue, setEditValue] = useState("");
 
     const handleInput = (input) => {
         setInput(input.target.value);
@@ -33,21 +35,21 @@ const Todo = () => {
         return randomColor;
     };
 
-    // const handleCheck = (index) => {
-    //     const updatedTodo = todo.map((item, i) => {
-    //         if (i === index) {
-    //             return { ...item, completed: !item.completed };
-    //         }
-    //         return item;
-    //     });
-    //     setTodo(updatedTodo);
-    // };
-
     const handleClearAll = (index) => {
         const clear = todo.filter((_, i) => index === -2);
         setTodo(clear);
     };
-
+    const handleEdit = (index) => {
+        setEditIndex(index);
+        setEditValue(todo[index]);
+    };
+    const handleSave = () => {
+        const updatedTodo = [...todo];
+        updatedTodo[editIndex] = editValue;
+        setTodo(updatedTodo);
+        setEditIndex(null);
+        setEditValue("");
+    };
     return (
         <>
             <h1>Notes</h1>
@@ -62,15 +64,22 @@ const Todo = () => {
             </div>
             <div className="container">
                 {todo.map((item, index) => (
-                    <div style={{ backgroundColor: generateRandomColor() }} className="content">
-                        <h3 style={{ textDecoration: item.completed ? "line-through" : "none" }} key={index}>
-                            {item}
-                        </h3>
-                        <div className="edit-todo">
-                            <FaCheck className="check-icon icon" /*onClick={() => handleCheck(index)}*/ />
-                            <FaRegEdit className="icon" />
-                            <FaTrash className="delete-icon icon" onClick={() => handleDelete(index)} />
-                        </div>
+                    <div key={index} style={{ backgroundColor: generateRandomColor() }} className="content">
+                        {editIndex === index ? (
+                            <>
+                                <input type="text " value={editValue} onChange={(e) => setEditValue(e.target.value)} />
+                                <button onClick={handleSave}>Save</button>
+                            </>
+                        ) : (
+                            <>
+                                <h3>{item}</h3>
+                                <div className="edit-todo">
+                                    <FaCheck className="check-icon icon" />
+                                    <FaRegEdit onClick={() => handleEdit(index)} className="icon" />
+                                    <FaTrash className="delete-icon icon" onClick={() => handleDelete(index)} />
+                                </div>
+                            </>
+                        )}
                     </div>
                 ))}
             </div>
